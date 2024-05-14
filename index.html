@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 
@@ -51,6 +53,29 @@
         </div>
 
     </div>
+
+    <script>
+        $("#iniciar").click(function () {
+            console.log("hola");
+        });
+
+
+        /*if ('NDEFReader' in window) {
+            const reader = new NDEFReader();
+            reader.scan().then(() => {
+                reader.onreading = event => {
+                    const message = event.message;
+                    // Aquí puedes procesar el mensaje recibido
+                    console.log(message);
+                };
+            }).catch(error => {
+                console.error('Error al iniciar la lectura:', error);
+            });
+        } else {
+            console.error('NFC no compatible con este dispositivo.');
+        }*/
+
+    </script>
 
 </body>
 
