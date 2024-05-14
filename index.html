@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="background-color: #07204A; margin-top: 150px; border-radius: 10px;" class="container">
+        <p>hola</p>
+        <div id="partes" class='card mb-1'>
+            <p class="fs-3">Iniciar un parte</p>
+            <div id="abrirParte" class='card mb-1'>
+                <button type="button" class="btn btn-primary btn-block" id='iniciar'
+                    style="background-color: red;">Iniciar
+                    Parte 🧾</button>
+                <div id="zonaFirma" class='zonas'>
+
+                    <div id='firma' class="fondoFirma"></div>
+                    <input type="text" id='firmaInput' hidden>
+                    <div id="opcionesFirma" class='m-1'>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="btn btn-sm btn-secondary" id="borraFirma">🚮 Borrar</div>
+                            </div>
+                            <div class="col-8">
+                                <div class="btn btn-success d-md-block" id="enviar">Enviar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cerrarParte" class='card mb-1'>
+                <button type="button" class="btn btn-danger btn-block" id='parar'>Cerrar Parte 🏃‍♀️</button>
+            </div>
+        </div>
+
+
+        <div id="break" class='card mb-1'>
+            <p class="fs-3">Break</p>
+            <button type="button" class="btn btn-outline-danger btn-block mb-1" id='break'>Parada parcial <span
+                    class="fas fa-utensils"></span></button>
+        </div>
+
+        <div id="nfc" class='card mb-1'>
+            <button type="button" class="btn btn-primary btn-block" id='iniciar'>Registrar el dispositivo para
+                NFC</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
