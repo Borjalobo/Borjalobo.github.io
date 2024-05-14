@@ -59,8 +59,8 @@
 
             if ('NDEFReader' in window) {
                 // La API NFC está disponible en este navegador
-                alert("La API NFC está disponible en este navegador");
-                alert(`Datos del móvil:\nNúmero de serie: ${serialNumber}\nMensaje: ${JSON.stringify(message)}`);
+                alert("La API NFC está disponible en este navegador ahora");
+                alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
 
                 // Obtener la información del dispositivo NFC
                 const reader = new NDEFReader();
@@ -73,7 +73,7 @@
                     // Por ejemplo, podrías enviarlos a una base de datos
 
                     // Mostrar alert con los datos del móvil
-                    alert(`Datos del móvil:\nNúmero de serie: ${serialNumber}\nMensaje: ${JSON.stringify(message)}`);
+                    alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
                 });
 
             } else {
