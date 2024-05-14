@@ -56,24 +56,17 @@
 
     <script>
         $(document).ready(function () {
-            /*console.log("El documento se ha cargado completamente.");
-            $("#iniciar").click(function () {
-                alert("hola");
-            });*/
+
             if ('NDEFReader' in window) {
+                // La API NFC está disponible en este navegador
+                alert("La API NFC está disponible en este navegador");
                 const reader = new NDEFReader();
-                reader.scan().then(() => {
-                    reader.onreading = event => {
-                        const message = event.message;
-                        // Aquí puedes procesar el mensaje recibido
-                        console.log(message);
-                    };
-                }).catch(error => {
-                    alert('Error al iniciar la lectura:', error);
-                });
+                // Utiliza el objeto reader para leer datos de una etiqueta NFC
             } else {
-                alert('NFC no compatible con este dispositivo.');
+                //console.error('La API NFC no está disponible en este navegador.');
+                alert("La API NFC no está disponible en este navegador.");
             }
+
         });
 
 
