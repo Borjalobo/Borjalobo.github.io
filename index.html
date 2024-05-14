@@ -59,9 +59,14 @@
     </div>
 
     <script>
-        $("#iniciar").click(function () {
-            console.log("hola");
+        $(document).ready(function () {
+            console.log("El documento se ha cargado completamente.");
+            $("#iniciar").click(function () {
+                console.log("hola");
+            });
         });
+
+
 
 
         /*if ('NDEFReader' in window) {
