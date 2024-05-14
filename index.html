@@ -73,10 +73,10 @@
                         console.log(message);
                     };
                 }).catch(error => {
-                    alert('Error al iniciar la lectura:', error);
+                    console.error('Error al iniciar la lectura:', error);
                 });
             } else {
-                alert('NFC no compatible con este dispositivo.');
+                console.error('NFC no compatible con este dispositivo.');
             }
         });
 
