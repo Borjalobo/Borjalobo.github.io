@@ -60,8 +60,19 @@
             if ('NDEFReader' in window) {
                 // La API NFC está disponible en este navegador
                 alert("La API NFC está disponible en este navegador");
-                const reader = new NDEFReader();
+
                 // Utiliza el objeto reader para leer datos de una etiqueta NFC
+                const reader = new NDEFReader();
+
+                // Escuchar eventos de lectura NFC
+                reader.addEventListener('reading', ({ message, serialNumber }) => {
+                    // Mostrar alert con los datos del dispositivo
+                    alert(`Datos del dispositivo:\nMensaje: ${JSON.stringify(message)}\nNúmero de serie: ${serialNumber}`);
+                });
+
+                // Iniciar la lectura NFC
+                reader.scan();
+
             } else {
                 //console.error('La API NFC no está disponible en este navegador.');
                 alert("La API NFC no está disponible en este navegador.");
