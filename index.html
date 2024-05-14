@@ -60,29 +60,30 @@
 
     <script>
         $(document).ready(function () {
-            console.log("El documento se ha cargado completamente.");
+            /*console.log("El documento se ha cargado completamente.");
             $("#iniciar").click(function () {
                 alert("hola");
-            });
+            });*/
+            if ('NDEFReader' in window) {
+                const reader = new NDEFReader();
+                reader.scan().then(() => {
+                    reader.onreading = event => {
+                        const message = event.message;
+                        // Aquí puedes procesar el mensaje recibido
+                        console.log(message);
+                    };
+                }).catch(error => {
+                    alert('Error al iniciar la lectura:', error);
+                });
+            } else {
+                alert('NFC no compatible con este dispositivo.');
+            }
         });
 
 
 
 
-        /*if ('NDEFReader' in window) {
-            const reader = new NDEFReader();
-            reader.scan().then(() => {
-                reader.onreading = event => {
-                    const message = event.message;
-                    // Aquí puedes procesar el mensaje recibido
-                    console.log(message);
-                };
-            }).catch(error => {
-                console.error('Error al iniciar la lectura:', error);
-            });
-        } else {
-            console.error('NFC no compatible con este dispositivo.');
-        }*/
+
     </script>
 
 </body>
