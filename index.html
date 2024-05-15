@@ -65,9 +65,38 @@
         $(document).ready(function () {
 
             if ('NDEFReader' in window) {
-                // La API NFC está disponible en este navegador
-                alert("La API NFC está disponible en este navegador 1600");
+                alert("La API NFC está disponible en este navegador 1648.");
+                navigator.permissions.query({ name: 'nfc' })
+                    .then(permissionStatus => {
+                        if (permissionStatus.state === 'granted') {
+                            // El usuario ya ha concedido permisos para acceder al NFC
+                            // Puedes inicializar el NDEFReader aquí
+                            initializeNFCReader();
+                        } else if (permissionStatus.state === 'prompt') {
+                            // El usuario aún no ha decidido, muestra un mensaje o una solicitud de permisos
+                            // y maneja la respuesta del usuario
+                            permissionStatus.onchange = () => {
+                                if (permissionStatus.state === 'granted') {
+                                    // El usuario ha concedido permisos
+                                    initializeNFCReader();
+                                } else {
+                                    // El usuario ha denegado permisos
+                                    console.log('El usuario ha denegado los permisos para acceder al NFC.');
+                                }
+                            };
+                        } else {
+                            // El usuario ha denegado explícitamente los permisos
+                            console.log('El usuario ha denegado los permisos para acceder al NFC.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al solicitar permisos NFC:', error);
+                    });
+            } else {
+                console.log('El navegador no es compatible con la API NDEFReader.');
+            }
 
+            function initializeNFCReader() {
                 const reader = new NDEFReader();
 
                 // Escuchar eventos de lectura NFC
@@ -84,18 +113,7 @@
 
                 // Mostrar mensaje de inicio de lectura
                 document.getElementById('result').innerHTML = '<p>Escaneando etiquetas NFC...</p>';
-            } else {
-                // La API NFC no está disponible en este navegador
-                alert("La API NFC no está disponible en este navegador");
             }
-
-
-
-
-
-
-
-
         });
 
 
