@@ -101,7 +101,8 @@
                         // Escuchar eventos de lectura NFC
                         reader.addEventListener('reading', ({ message, serialNumber }) => {
                             // Mostrar los datos leídos
-                            document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(message, null, 2)}</pre>`;
+                            //document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(message, null, 2)}</pre>`;
+                            document.getElementById('result').innerHTML = "hola";
                         });
 
                         // Iniciar la lectura NFC
