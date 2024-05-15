@@ -65,7 +65,7 @@
         $(document).ready(function () {
 
             if ('NDEFReader' in window) {
-                alert('NDEFReader es compatible con el navegador 1740');
+                alert('NDEFReader es compatible con el navegador 1755');
                 navigator.permissions.query({ name: 'nfc' })
                     .then(permissionStatus => {
                         if (permissionStatus.state === 'granted') {
