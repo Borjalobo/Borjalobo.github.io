@@ -105,8 +105,10 @@
                 document.getElementById('grantPermission').addEventListener('click', () => {
                     alert("Pulsando grantPermission");
                     permissionStatus.onchange = () => {
+                        alert("permissionStatus ha cambiado.");
                         if (permissionStatus.state === 'granted') {
                             // El usuario ha concedido permisos
+                            alert("El usuario ha concedido permisos");
                             initializeNFCReader();
                             alert("El usuario ha concedido permisos");
                         } else {
