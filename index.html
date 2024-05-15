@@ -104,6 +104,7 @@
                 // Manejar los clics en los botones de permisos
                 document.getElementById('grantPermission').addEventListener('click', () => {
                     alert("Pulsando grantPermission");
+
                     permissionStatus.onchange = () => {
                         alert("permissionStatus ha cambiado.");
                         if (permissionStatus.state === 'granted') {
@@ -111,13 +112,17 @@
                             alert("El usuario ha concedido permisos");
                             initializeNFCReader();
                             alert("El usuario ha concedido permisos");
+                            permissionStatus.resolve('granted');
+                            document.body.removeChild(permissionDialog);
                         } else {
                             // El usuario ha denegado permisos
                             alert('El usuario ha denegado los permisos para acceder al NFC.');
+                            permissionStatus.resolve('granted');
+                            document.body.removeChild(permissionDialog);
                         }
                     };
-                    permissionStatus.resolve('granted');
-                    document.body.removeChild(permissionDialog);
+                    /* permissionStatus.resolve('granted');
+                     document.body.removeChild(permissionDialog);*/
                 });
 
                 document.getElementById('denyPermission').addEventListener('click', () => {
