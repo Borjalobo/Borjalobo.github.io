@@ -52,12 +52,19 @@
                 NFC</button>
         </div>
 
+        <!-- Botones para leer y escribir -->
+        <button onclick="startNFCReading()">Iniciar Lectura NFC</button>
+        <button onclick="writeNFCData()">Escribir Datos NFC</button>
+
+        <!-- Espacio para mostrar resultados -->
+        <div id="result"></div>
+
     </div>
 
     <script>
         $(document).ready(function () {
 
-            if ('NDEFReader' in window) {
+            /*if ('NDEFReader' in window) {
                 // La API NFC está disponible en este navegador
                 alert("La API NFC está disponible en este navegador ahora");
                 alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
@@ -82,7 +89,47 @@
                 alert("La API NFC no está disponible en este navegador");
                 alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
 
+            }*/
+
+            async function startNFCReading() {
+                try {
+                    // Comprobar si el navegador es compatible con la API NFC
+                    if ('NDEFReader' in window) {
+                        // La API NFC está disponible en este navegador
+                        const reader = new NDEFReader();
+
+                        // Escuchar eventos de lectura NFC
+                        reader.addEventListener('reading', ({ message, serialNumber }) => {
+                            // Mostrar los datos leídos
+                            document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(message, null, 2)}</pre>`;
+                        });
+
+                        // Iniciar la lectura NFC
+                        await reader.scan();
+
+                        // Mostrar mensaje de inicio de lectura
+                        document.getElementById('result').innerHTML = '<p>Escaneando etiquetas NFC...</p>';
+                    } else {
+                        // La API NFC no está disponible en este navegador
+                        document.getElementById('result').innerHTML = '<p>La API NFC no está disponible en este navegador</p>';
+                    }
+                } catch (error) {
+                    console.error('Error al iniciar la lectura NFC:', error);
+                    document.getElementById('result').innerHTML = '<p>Error al iniciar la lectura NFC</p>';
+                }
             }
+
+            // Función para escribir datos NFC (dummy)
+            function writeNFCData() {
+                try {
+                    // Simplemente muestra un mensaje de que la escritura no está implementada en este ejemplo
+                    document.getElementById('result').innerHTML = '<p>La escritura NFC no está implementada en este ejemplo</p>';
+                } catch (error) {
+                    console.error('Error al escribir datos NFC:', error);
+                    document.getElementById('result').innerHTML = '<p>Error al escribir datos NFC</p>';
+                }
+            }
+
 
 
 
