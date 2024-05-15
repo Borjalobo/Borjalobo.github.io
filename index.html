@@ -66,79 +66,32 @@
 
             if ('NDEFReader' in window) {
                 // La API NFC está disponible en este navegador
-                alert("La API NFC está disponible en este navegador ahora 1300");
-                //alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
-                /*alert("hola");
-                // Obtener la información del dispositivo NFC
+                alert("La API NFC está disponible en este navegador");
+
                 const reader = new NDEFReader();
 
-                alert(reader.scan());
                 // Escuchar eventos de lectura NFC
-                reader.addEventListener('reading', async ({ message, serialNumber }) => {
-                    // Aquí se pueden manejar los datos leídos
-                    // Por ejemplo, podrías enviarlos a una base de datos
+                reader.addEventListener('reading', ({ message, serialNumber }) => {
+                    // Mostrar los datos leídos
+                    //document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(message, null, 2)}</pre>`;
+                    //document.getElementById('result').innerHTML = "hola";
+                    alert(message);
+                    alert();
+                });
 
-                    // Mostrar alert con los datos del móvil
-                    alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
-                });*/
+                // Iniciar la lectura NFC
+                reader.scan();
 
-                try {
-                    // Simulación de datos de la etiqueta NFC
-                    const serialNumber = navigator.serial || 'N/A';
-                    // Mostrar los datos leídos simulados
-                    //document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(simulatedNFCData, null, 2)}</pre>`;
-                    alert(navigator.serial);
-                } catch (error) {
-                    console.error('Error al simular la lectura NFC:', error);
-                    //document.getElementById('result').innerHTML = '<p>Error al simular la lectura NFC</p>';
-                }
-
+                // Mostrar mensaje de inicio de lectura
+                document.getElementById('result').innerHTML = '<p>Escaneando etiquetas NFC...</p>';
             } else {
                 // La API NFC no está disponible en este navegador
                 alert("La API NFC no está disponible en este navegador");
-                alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
-
             }
 
-            /*async function startNFCReading() {
-                try {
-                    // Comprobar si el navegador es compatible con la API NFC
-                    if ('NDEFReader' in window) {
-                        // La API NFC está disponible en este navegador
-                        const reader = new NDEFReader();
 
-                        // Escuchar eventos de lectura NFC
-                        reader.addEventListener('reading', ({ message, serialNumber }) => {
-                            // Mostrar los datos leídos
-                            //document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(message, null, 2)}</pre>`;
-                            document.getElementById('result').innerHTML = "hola";
-                        });
 
-                        // Iniciar la lectura NFC
-                        await reader.scan();
 
-                        // Mostrar mensaje de inicio de lectura
-                        document.getElementById('result').innerHTML = '<p>Escaneando etiquetas NFC...</p>';
-                    } else {
-                        // La API NFC no está disponible en este navegador
-                        document.getElementById('result').innerHTML = '<p>La API NFC no está disponible en este navegador</p>';
-                    }
-                } catch (error) {
-                    console.error('Error al iniciar la lectura NFC:', error);
-                    document.getElementById('result').innerHTML = '<p>Error al iniciar la lectura NFC</p>';
-                }
-            }*/
-
-            // Función para escribir datos NFC (dummy)
-            /*function writeNFCData() {
-                try {
-                    // Simplemente muestra un mensaje de que la escritura no está implementada en este ejemplo
-                    document.getElementById('result').innerHTML = '<p>La escritura NFC no está implementada en este ejemplo</p>';
-                } catch (error) {
-                    console.error('Error al escribir datos NFC:', error);
-                    document.getElementById('result').innerHTML = '<p>Error al escribir datos NFC</p>';
-                }
-            }*/
 
 
 
