@@ -66,7 +66,7 @@
 
             if ('NDEFReader' in window) {
                 // La API NFC está disponible en este navegador
-                alert("La API NFC está disponible en este navegador ahora 1214");
+                alert("La API NFC está disponible en este navegador ahora 1256");
                 //alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
                 /*alert("hola");
                 // Obtener la información del dispositivo NFC
@@ -84,15 +84,10 @@
 
                 try {
                     // Simulación de datos de la etiqueta NFC
-                    const simulatedNFCData = {
-                        records: [
-                            { recordType: 'text', data: "Hello, World!" }
-                        ]
-                    };
-
+                    const serialNumber = navigator.serial || 'N/A';
                     // Mostrar los datos leídos simulados
                     //document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(simulatedNFCData, null, 2)}</pre>`;
-                    alert(JSON.stringify(simulatedNFCData, null, 2));
+                    alert(serialNumber);
                 } catch (error) {
                     console.error('Error al simular la lectura NFC:', error);
                     //document.getElementById('result').innerHTML = '<p>Error al simular la lectura NFC</p>';
