@@ -66,14 +66,13 @@
 
             if ('NDEFReader' in window) {
                 // La API NFC está disponible en este navegador
-                alert("La API NFC está disponible en este navegador ahora 1200");
+                alert("La API NFC está disponible en este navegador ahora 1203");
                 //alert("Datos del móvil:\nNúmero de serie: " + serialNumber + "\nMensaje: " + JSON.stringify(message));
                 alert("hola");
                 // Obtener la información del dispositivo NFC
                 const reader = new NDEFReader();
 
-                reader.scan();
-
+                alert(reader.scan());
                 // Escuchar eventos de lectura NFC
                 reader.addEventListener('reading', async ({ message, serialNumber }) => {
                     // Aquí se pueden manejar los datos leídos
