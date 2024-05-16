@@ -61,18 +61,18 @@
         $(document).ready(function () {
 
             if ('NDEFReader' in window) {
-                //alert('El navegador es compatible con NFC. 1731');
+                alert('El navegador es compatible con NFC. 1757');
                 const ndef = new NDEFReader();
                 ndef.scan().then(() => {
-                    console.log("Scan started successfully.");
+                    alert("Scan started successfully.");
                     ndef.onreadingerror = () => {
-                        console.log("Cannot read data from the NFC tag. Try another one?");
+                        alert("Cannot read data from the NFC tag. Try another one?");
                     };
                     ndef.onreading = event => {
-                        console.log("Entra");
+                        alert("Entra");
                     };
                 }).catch(error => {
-                    console.log(`Error! Scan failed to start: ${error}.`);
+                    alert(`Error! Scan failed to start: ${error}.`);
                 });
             } else {
                 alert('El navegador no es compatible con NFC.');
