@@ -65,7 +65,8 @@
                 const reader = new NDEFReader();
                 reader.scan().then(({ message }) => {
                     const serialNumber = message.records[0].recordId;
-                    document.getElementById('serialNumber').innerText = 'Número de Serie: ' + serialNumber;
+                    //document.getElementById('serialNumber').innerText = 'Número de Serie: ' + serialNumber;
+                    alert(serialNumber);
                 }).catch(error => {
                     alert('Error al leer NFC:', error);
                 });
