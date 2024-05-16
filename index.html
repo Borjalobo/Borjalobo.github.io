@@ -54,97 +54,26 @@
 
     </div>
 
+    <button onclick="leerNFC()">Leer NFC</button>
+    <p id="serialNumber"></p>
+
     <script>
         $(document).ready(function () {
-
-            if ('NDEFReader' in window) {
-                alert('NDEFReader es compatible con el navegador 1755');
-                navigator.permissions.query({ name: 'nfc' })
-                    .then(permissionStatus => {
-                        if (permissionStatus.state === 'granted') {
-                            // El usuario ya ha concedido permisos para acceder al NFC
-                            // Puedes inicializar el NDEFReader aquí
-                            initializeNFCReader();
-                            alert('El usuario ha concedido los permisos para acceder al NFC.');
-                        } else if (permissionStatus.state === 'prompt') {
-                            // Mostrar una interfaz de usuario para solicitar permisos
-                            alert("El usuario debe solicitar permisos");
-                            showPermissionDialog(permissionStatus);
-                        } else {
-                            // El usuario ha denegado explícitamente los permisos
-                            alert('El usuario ha denegado los permisos para acceder al NFC.');
-                        }
-                    })
-                    .catch(error => {
-                        alert('Error al solicitar permisos NFC:', error);
+            function leerNFC() {
+                if ('NDEFReader' in window) {
+                    alert('El navegador es compatible con NFC. 1726');
+                    const reader = new NDEFReader();
+                    reader.scan().then(({ message }) => {
+                        const serialNumber = message.records[0].recordId;
+                        document.getElementById('serialNumber').innerText = 'Número de Serie: ' + serialNumber;
+                    }).catch(error => {
+                        alert('Error al leer NFC:', error);
                     });
-            } else {
-                alert('El navegador no es compatible con la API NDEFReader.');
+                } else {
+                    alert('El navegador no es compatible con NFC.');
+                }
             }
 
-            function showPermissionDialog(permissionStatus) {
-                // Mostrar un mensaje o un diálogo que explique por qué se necesita acceso al NFC
-                // y proporcionar opciones para que el usuario conceda o deniegue los permisos
-                // Por ejemplo:
-                const permissionDialog = document.createElement('div');
-                permissionDialog.innerHTML = `
-    <p>Esta aplicación necesita acceder al NFC para funcionar correctamente.</p>
-    <button id="grantPermission">Permitir</button>
-    <button id="denyPermission">Denegar</button>
-  `;
-                document.body.appendChild(permissionDialog);
-
-                // Manejar los clics en los botones de permisos
-                document.getElementById('grantPermission').addEventListener('click', () => {
-                    alert("Pulsando grantPermission");
-
-                    permissionStatus.onchange = () => {
-                        alert("permissionStatus ha cambiado.");
-                        if (permissionStatus.state === 'granted') {
-                            // El usuario ha concedido permisos
-                            alert("El usuario ha concedido permisos");
-                            initializeNFCReader();
-                            alert("El usuario ha concedido permisos");
-                            permissionStatus.resolve('granted');
-                            document.body.removeChild(permissionDialog);
-                        } else {
-                            // El usuario ha denegado permisos
-                            alert('El usuario ha denegado los permisos para acceder al NFC.');
-                            permissionStatus.resolve('granted');
-                            document.body.removeChild(permissionDialog);
-                        }
-                    };
-                    /* permissionStatus.resolve('granted');
-                     document.body.removeChild(permissionDialog);*/
-                });
-
-                document.getElementById('denyPermission').addEventListener('click', () => {
-                    alert("Pulsando denyPermission");
-                    permissionStatus.onchange = () => {
-                        alert('El usuario ha denegado los permisos para acceder al NFC.');
-                    };
-                    permissionStatus.resolve('denied');
-                    document.body.removeChild(permissionDialog);
-                });
-            }
-
-            function initializeNFCReader() {
-                alert("Entra en la funcion de NDEFReader");
-                const reader = new NDEFReader();
-
-                // Escuchar eventos de lectura NFC
-                reader.addEventListener('reading', ({ message, serialNumber }) => {
-                    // Mostrar los datos leídos
-                    //document.getElementById('result').innerHTML = `<p>Datos leídos:</p><pre>${JSON.stringify(message, null, 2)}</pre>`;
-                    //document.getElementById('result').innerHTML = "hola";
-                    alert(message);
-
-                });
-
-                // Iniciar la lectura NFC
-                reader.scan();
-
-            }
         });
 
 
