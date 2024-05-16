@@ -59,20 +59,20 @@
 
     <script>
         $(document).ready(function () {
-            function leerNFC() {
-                if ('NDEFReader' in window) {
-                    alert('El navegador es compatible con NFC. 1726');
-                    const reader = new NDEFReader();
-                    reader.scan().then(({ message }) => {
-                        const serialNumber = message.records[0].recordId;
-                        document.getElementById('serialNumber').innerText = 'Número de Serie: ' + serialNumber;
-                    }).catch(error => {
-                        alert('Error al leer NFC:', error);
-                    });
-                } else {
-                    alert('El navegador no es compatible con NFC.');
-                }
+
+            if ('NDEFReader' in window) {
+                alert('El navegador es compatible con NFC. 1731');
+                const reader = new NDEFReader();
+                reader.scan().then(({ message }) => {
+                    const serialNumber = message.records[0].recordId;
+                    document.getElementById('serialNumber').innerText = 'Número de Serie: ' + serialNumber;
+                }).catch(error => {
+                    alert('Error al leer NFC:', error);
+                });
+            } else {
+                alert('El navegador no es compatible con NFC.');
             }
+
 
         });
 
