@@ -62,7 +62,7 @@
     <script>
         document.querySelector('#scan-button').addEventListener('click', async () => {
             if ('NDEFReader' in window) {
-                alert("El navegador soporta NFC.");
+                alert("El navegador soporta NFC. 1348");
                 try {
                     const ndef = new NDEFReader();
                     await ndef.scan();
