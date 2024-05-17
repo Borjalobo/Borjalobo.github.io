@@ -54,12 +54,12 @@
 
     </div>
 
-    <button onclick="leerNFC()">Leer NFC</button>
-    <p id="serialNumber"></p>
+
+    <p ontouchend="leerNFC()">Toca</p>
 
     <script>
         $(document).ready(function () {
-
+            alert('El dom se ha cargado 10:07');
             function leerNFC() {
                 alert("hola");
             }
