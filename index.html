@@ -55,47 +55,30 @@
     </div>
 
 
-    <button id="scan-button">Scan NFC</button>
-    <p id="serial-number">Serial Number: </p>
-    <p id="ndef-message">NDEF Message: </p>
+    <p ontouchend="leerNFC()">Toca</p>
 
     <script>
-        document.querySelector('#scan-button').addEventListener('click', async () => {
+        function leerNFC() {
             if ('NDEFReader' in window) {
-                alert("El navegador soporta NFC. 1348");
-                try {
-                    const ndef = new NDEFReader();
-                    await ndef.scan();
-                    alert('El escaneo comenzó exitosamente.');
-
-                    ndef.onreading = (event) => {
-                        const serialNumber = event.serialNumber;
-                        document.querySelector('#serial-number').textContent = `Serial Number: ${serialNumber}`;
-
-                        const message = event.message;
-                        let ndefContent = '';
-                        for (const record of message.records) {
-                            let recordData = '';
-                            if (record.recordType === "text") {
-                                recordData = new TextDecoder().decode(record.data);
-                            } else if (record.recordType === "url") {
-                                recordData = new TextDecoder().decode(record.data);
-                            }
-                            ndefContent += `Record type: ${record.recordType}, data: ${recordData}\n`;
-                        }
-                        document.querySelector('#ndef-message').textContent = `NDEF Message: ${ndefContent}`;
-                    };
-
+                alert('El navegador es compatible con NFC. 1359');
+                const ndef = new NDEFReader();
+                ndef.scan().then(() => {
+                    alert("El escaneo comenzó con exito.");
                     ndef.onreadingerror = () => {
-                        alert('Error al leer la etiqueta NFC');
+                        alert("No se pueden leer datos de la etiqueta NFC. ¿Prueba otro?");
                     };
-                } catch (error) {
-                    alert('Error al iniciar el escaneo NFC:', error);
-                }
+                    ndef.onreading = event => {
+                        //ndef.addEventListener("reading", ({ message, serialNumber }) => {
+                        alert("Mensaje: " + event.message + ", número de serie: " + event.serialNumber);
+                    }
+                }).catch(error => {
+                    alert(`Error! El escaneo no pudo iniciarse: ${error}.`);
+                });
             } else {
-                alert('NFC no es compatible con este navegador.');
+                alert('El navegador no es compatible con NFC.');
             }
-        });
+        }
+
 
     </script>
 
