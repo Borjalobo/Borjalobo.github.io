@@ -55,48 +55,47 @@
     </div>
 
 
-    <p ontouchend="leerNFC()">Toca</p>
+    <button id="scan-button">Scan NFC</button>
+    <p id="serial-number">Serial Number: </p>
+    <p id="ndef-message">NDEF Message: </p>
 
     <script>
-        $(document).ready(function () {
-
-
-        });
-        function leerNFC() {
+        document.querySelector('#scan-button').addEventListener('click', async () => {
             if ('NDEFReader' in window) {
-                alert('El navegador es compatible con NDEFReader. 1328');
-                if ('NFC' in window) {
-                    alert('NFC está soportado por el navegador 1328');
-                    try {
-                        const nfc = new NFC();
-                        nfc.scan();
-                        alert('El escaneo NFC se inició correctamente.');
-                    } catch (error) {
-                        alert('El escaneo NFC no pudo iniciarse:', error);
-                    }
-                } else {
-                    alert('NFC no esta soportado por el navegador 1328.');
-                }
-                const ndef = new NDEFReader();
-                ndef.scan().then(() => {
-                    alert("El escaneo comenzó con exito.");
-                    ndef.onreadingerror = () => {
-                        alert("No se pueden leer datos de la etiqueta NFC. ¿Prueba otro?");
+                alert("El navegador soporta NFC.");
+                try {
+                    const ndef = new NDEFReader();
+                    await ndef.scan();
+                    alert('El escaneo comenzó exitosamente.');
+
+                    ndef.onreading = (event) => {
+                        const serialNumber = event.serialNumber;
+                        document.querySelector('#serial-number').textContent = `Serial Number: ${serialNumber}`;
+
+                        const message = event.message;
+                        let ndefContent = '';
+                        for (const record of message.records) {
+                            let recordData = '';
+                            if (record.recordType === "text") {
+                                recordData = new TextDecoder().decode(record.data);
+                            } else if (record.recordType === "url") {
+                                recordData = new TextDecoder().decode(record.data);
+                            }
+                            ndefContent += `Record type: ${record.recordType}, data: ${recordData}\n`;
+                        }
+                        document.querySelector('#ndef-message').textContent = `NDEF Message: ${ndefContent}`;
                     };
-                    ndef.onreading = event => {
-                        //ndef.addEventListener("reading", ({ message, serialNumber }) => {
-                        alert("Mensaje: " + event.message + ", número de serie: " + event.serialNumber);
-                    }
-                }).catch(error => {
-                    alert(`Error! El escaneo no pudo iniciarse: ${error}.`);
-                });
+
+                    ndef.onreadingerror = () => {
+                        alert('Error al leer la etiqueta NFC');
+                    };
+                } catch (error) {
+                    alert('Error al iniciar el escaneo NFC:', error);
+                }
             } else {
-                alert('El navegador no es compatible con NDEFReader 1328.');
+                alert('NFC no es compatible con este navegador.');
             }
-        }
-
-
-
+        });
 
     </script>
 
