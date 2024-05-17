@@ -58,6 +58,21 @@
     <p ontouchend="leerNFC()">Toca</p>
 
     <script>
+        $(document).ready(function () {
+            alert("DOM cargado.");
+            if ('NFC' in window) {
+                alert('NFC está soportado por el navegador 1305');
+                try {
+                    const nfc = new NFC();
+                    nfc.scan();
+                    alert('El escaneo NFC se inició correctamente.');
+                } catch (error) {
+                    alert('El escaneo NFC no pudo iniciarse:', error);
+                }
+            } else {
+                alert('NFC no esta soportado por el navegador.');
+            }
+        });
         /*function leerNFC() {
             if ('NDEFReader' in window) {
                 alert('El navegador es compatible con NFC. 1107');
@@ -79,18 +94,7 @@
             }
         }*/
 
-        if ('NFC' in window) {
-            alert('NFC está soportado por el navegador 1305');
-            try {
-                const nfc = new NFC();
-                await nfc.scan();
-                alert('El escaneo NFC se inició correctamente.');
-            } catch (error) {
-                alert('El escaneo NFC no pudo iniciarse:', error);
-            }
-        } else {
-            alert('NFC no esta soportado por el navegador.');
-        }
+
 
 
     </script>
