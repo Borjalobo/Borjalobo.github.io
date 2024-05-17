@@ -61,7 +61,7 @@
         $(document).ready(function () {
 
             if ('NDEFReader' in window) {
-                alert('El navegador es compatible con NFC. 934');
+                alert('El navegador es compatible con NFC. 940');
                 const ndef = new NDEFReader();
                 ndef.scan().then(() => {
                     alert("Scan started successfully.");
@@ -69,7 +69,7 @@
                         alert("Cannot read data from the NFC tag. Try another one?");
                     };
                     //ndef.onreading = event => {
-                    addEventListener("reading", ({ message, serialNumber }) => {
+                    ndef.addEventListener("reading", ({ message, serialNumber }) => {
                         alert("Entra");
                     });
                 }).catch(error => {
