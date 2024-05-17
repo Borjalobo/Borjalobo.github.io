@@ -60,8 +60,12 @@
     <script>
         $(document).ready(function () {
 
+            function leerNFC() {
+                alert("hola");
+            }
+
             if ('NDEFReader' in window) {
-                alert('El navegador es compatible con NFC. 940');
+                alert('El navegador es compatible con NFC. 955');
                 const ndef = new NDEFReader();
                 ndef.scan().then(() => {
                     alert("Scan started successfully.");
