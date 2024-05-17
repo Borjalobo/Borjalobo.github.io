@@ -60,39 +60,24 @@
     <script>
         function leerNFC() {
             if ('NDEFReader' in window) {
-                alert('El navegador es compatible con NFC. 1023');
+                alert('El navegador es compatible con NFC. 1035');
                 const ndef = new NDEFReader();
                 ndef.scan().then(() => {
-                    alert("Scan started successfully.");
+                    alert("El escaneo comenzó con exito.");
                     ndef.onreadingerror = () => {
-                        alert("Cannot read data from the NFC tag. Try another one?");
+                        alert("No se pueden leer datos de la etiqueta NFC. ¿Prueba otro?");
                     };
                     //ndef.onreading = event => {
                     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-                        alert("Mensaje: " + message.NDEFReader + ", número de serie: " + serialNumber);
+                        alert("Mensaje: " + message + ", número de serie: " + serialNumber);
                     });
                 }).catch(error => {
-                    alert(`Error! Scan failed to start: ${error}.`);
+                    alert(`Error! El escaneo no pudo iniciarse: ${error}.`);
                 });
             } else {
                 alert('El navegador no es compatible con NFC.');
             }
         }
-
-
-
-        /*$(document).ready(function () {
-            alert('El dom se ha cargado 10:11');
-
-
-
-
-
-        });*/
-
-
-
-
 
     </script>
 
