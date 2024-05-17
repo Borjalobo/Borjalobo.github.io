@@ -68,9 +68,10 @@
                     ndef.onreadingerror = () => {
                         alert("Cannot read data from the NFC tag. Try another one?");
                     };
-                    ndef.onreading = event => {
+                    //ndef.onreading = event => {
+                    addEventListener("reading", ({ message, serialNumber }) => {
                         alert("Entra");
-                    };
+                    });
                 }).catch(error => {
                     alert(`Error! Scan failed to start: ${error}.`);
                 });
