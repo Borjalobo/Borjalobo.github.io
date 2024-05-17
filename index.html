@@ -58,11 +58,12 @@
     <p ontouchend="leerNFC()">Toca</p>
 
     <script>
+        function leerNFC() {
+            alert("hola");
+        }
         $(document).ready(function () {
-            alert('El dom se ha cargado 10:07');
-            function leerNFC() {
-                alert("hola");
-            }
+            alert('El dom se ha cargado 10:11');
+
 
             /*if ('NDEFReader' in window) {
                 alert('El navegador es compatible con NFC. 955');
