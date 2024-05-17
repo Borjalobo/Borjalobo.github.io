@@ -60,7 +60,7 @@
     <script>
         function leerNFC() {
             if ('NDEFReader' in window) {
-                alert('El navegador es compatible con NFC. 1016');
+                alert('El navegador es compatible con NFC. 1020');
                 const ndef = new NDEFReader();
                 ndef.scan().then(() => {
                     alert("Scan started successfully.");
@@ -69,7 +69,7 @@
                     };
                     //ndef.onreading = event => {
                     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-                        alert("Entra");
+                        alert("Mensaje: " + message + ", número de serie: " + serialNumber);
                     });
                 }).catch(error => {
                     alert(`Error! Scan failed to start: ${error}.`);
