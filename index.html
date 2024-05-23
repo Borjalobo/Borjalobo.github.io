@@ -59,23 +59,55 @@
 
     <script>
         function leerNFC() {
+            // if ('NDEFReader' in window) {
+            //     alert('El navegador es compatible con NFC. 1359');
+            //     const ndef = new NDEFReader();
+            //     ndef.scan().then(() => {
+            //         alert("El escaneo comenzó con exito.");
+            //         ndef.onreadingerror = () => {
+            //             alert("No se pueden leer datos de la etiqueta NFC. ¿Prueba otro?");
+            //         };
+            //         ndef.onreading = event => {
+            //             //ndef.addEventListener("reading", ({ message, serialNumber }) => {
+            //             alert("Mensaje: " + event.message + ", número de serie: " + event.serialNumber);
+            //         }
+            //     }).catch(error => {
+            //         alert(`Error! El escaneo no pudo iniciarse: ${error}.`);
+            //     });
+            // } else {
+            //     alert('El navegador no es compatible con NFC.');
+            // }
+
             if ('NDEFReader' in window) {
-                alert('El navegador es compatible con NFC. 1359');
-                const ndef = new NDEFReader();
-                ndef.scan().then(() => {
-                    alert("El escaneo comenzó con exito.");
-                    ndef.onreadingerror = () => {
-                        alert("No se pueden leer datos de la etiqueta NFC. ¿Prueba otro?");
-                    };
+                try {
+                    const ndef = new NDEFReader();
+                    ndef.scan();
+                    //document.getElementById('status').textContent = "Escaneo iniciado con éxito.";
+                    alert("Escaneo iniciado con éxito.");
                     ndef.onreading = event => {
-                        //ndef.addEventListener("reading", ({ message, serialNumber }) => {
-                        alert("Mensaje: " + event.message + ", número de serie: " + event.serialNumber);
-                    }
-                }).catch(error => {
-                    alert(`Error! El escaneo no pudo iniciarse: ${error}.`);
-                });
+                        const message = event.message;
+                        let uid = "";
+                        for (const record of message.records) {
+                            if (record.recordType === "text") {
+                                uid += new TextDecoder(record.encoding).decode(record.data);
+                            }
+                        }
+                        if (uid) {
+                            //document.getElementById('uid').textContent = uid;
+                            alert(uid);
+                            //compartirUID(uid);
+                        } else {
+                            //document.getElementById('status').textContent = "No se pudo leer el UID.";
+                            alert("No se pudo leer el UID.");
+                        }
+                    };
+                } catch (error) {
+                   // document.getElementById('status').textContent = `Error al iniciar el escaneo NFC: ${error}`;
+                   alert("Error al iniciar el escaneo NFC: ${error}");
+                }
             } else {
-                alert('El navegador no es compatible con NFC.');
+                //document.getElementById('status').textContent = "NFC no es soportado por este navegador.";
+                alert("NFC no es soportado por este navegador.");
             }
         }
 
